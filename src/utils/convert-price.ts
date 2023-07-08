@@ -21,6 +21,10 @@ export const convertPrice = ({
     throw new Error('Some param(s) is not number');
   }
 
+  if (fromPrice < 0 || toPrice < 0 || amount < 0) {
+    throw new Error('Price/amount cannot be less than 0');
+  }
+
   return new Decimal(amount)
     .mul(new Decimal(fromPrice))
     .div(toPrice)
