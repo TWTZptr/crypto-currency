@@ -1,4 +1,4 @@
-import { convertPrice } from './convertPrice';
-import { isNumber } from './isNumber';
+import { convertPrice } from './convert-price';
+import { isNumber } from './is-number';
 
 export { convertPrice, isNumber };

@@ -7,7 +7,7 @@ import { ConvertCurrencyResponseDto } from './dto/convert-currency-response.dto'
 import { CurrencyApiResponse } from './types/currency-api-response.type';
 import { Currency } from './types/currency.type';
 import { getTokenZeroPriceMsg, getUnexistTokenMsg } from './error-messages';
-import { convertPrice } from 'src/utils/convertPrice';
+import { convertPrice } from 'src/utils/convert-price';
 
 @Injectable()
 export class CurrencyService {

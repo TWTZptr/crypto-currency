@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { isNumber } from './isNumber';
+import { isNumber } from './is-number';
 
 /**
  * @description Конвертирует amount монет по цене fromPrice в монеты по цене toPrice
