@@ -7,7 +7,7 @@ import { ConvertCurrencyResponseDto } from './dto/convert-currency-response.dto'
 import { CurrencyApiResponse } from './types/currency-api-response.type';
 import { Currency } from './types/currency.type';
 import { getTokenZeroPriceMsg, getUnexistTokenMsg } from './error-messages';
-import Decimal from 'decimal.js';
+import { convertPrice } from 'src/utils/convertPrice';
 
 @Injectable()
 export class CurrencyService {
@@ -40,10 +40,11 @@ export class CurrencyService {
       throw new BadRequestException(getTokenZeroPriceMsg(to));
     }
 
-    const result: number = new Decimal(amount)
-      .mul(new Decimal(fromCurrency.price))
-      .div(toCurrency.price)
-      .toNumber();
+    const result: number = convertPrice({
+      fromPrice: fromCurrency.price,
+      toPrice: toCurrency.price,
+      amount,
+    });
 
     return { result, amount, to, from };
   }
