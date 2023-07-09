@@ -5,9 +5,9 @@ import { CURRENCY_API_URL, DEFAULT_AMOUNT, DEFAULT_TOKEN } from './constants';
 import { firstValueFrom } from 'rxjs';
 import { ConvertCurrencyResponseDto } from './dto/convert-currency-response.dto';
 import { CurrencyApiResponse } from './types/currency-api-response.type';
-import { Currency } from './types/currency.type';
 import { getTokenZeroPriceMsg, getUnexistTokenMsg } from './error-messages';
 import { convertPrice } from 'src/utils/convert-price';
+import { findTokenInCurrencies } from 'src/utils/find-token-in-currencies.ts';
 
 @Injectable()
 export class CurrencyService {
@@ -22,16 +22,15 @@ export class CurrencyService {
       this.httpService.get<CurrencyApiResponse>(CURRENCY_API_URL),
     );
 
-    const fromCurrency: Currency | undefined = data.data.find(
-      (currency: Currency) => currency.key === from,
-    );
+    const { fromCurrency, toCurrency } = findTokenInCurrencies(data.data, {
+      from,
+      to,
+    });
+
     if (!fromCurrency) {
       throw new BadRequestException(getUnexistTokenMsg(from));
     }
 
-    const toCurrency: Currency | undefined = data.data.find(
-      (currency: Currency) => currency.key === to,
-    );
     if (!toCurrency) {
       throw new BadRequestException(getUnexistTokenMsg(to));
     }
