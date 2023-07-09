@@ -60,15 +60,3 @@ const computePrizeDistribution = (
 type Prizes = {
   [k: string]: number;
 };
-
-console.log(
-  computePrize(
-    {
-      ETH: 2,
-      TRON: 3,
-      MATIC: 2,
-    },
-    ['ETH', 'ETH', 'ETH/TRON', 'TRON/ETH', 'TRON/MATIC', 'TRON', 'MATIC'],
-  ),
-);
-console.log(computePrize({}, []));
