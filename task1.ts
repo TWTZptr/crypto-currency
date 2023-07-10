@@ -28,7 +28,10 @@ const computePrizeDistribution = (
     requestedPrizes[currentPool.length].split('/');
 
   for (const prizeToSearch of prizesToSearch) {
-    if (!availablePrizes[prizeToSearch]) {
+    if (
+      !availablePrizes[prizeToSearch] ||
+      availablePrizes[prizeToSearch] <= 0
+    ) {
       // Требуемого токена не осталось
       continue;
     }
